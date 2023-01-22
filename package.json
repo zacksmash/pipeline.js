@@ -1,5 +1,5 @@
 {
-  "name": "pipeline.js",
+  "name": "@zacksmash/pipeline.js",
   "version": "1.0.0",
   "description": "Laravel's Pipeline in JS form",
   "main": "index.js",

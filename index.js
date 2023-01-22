@@ -66,7 +66,7 @@ class Pipeline {
       .slice()
       .reverse()
       .reduce(
-        this.carry(), this.prepareDestination(destination)
+        this.#carry(), this.#prepareDestination(destination)
       );
 
     return pipeline(this.passable);
@@ -92,7 +92,7 @@ class Pipeline {
       try {
         return destination(passable);
       } catch (e) {
-        return this.handleException(passable, e);
+        return this.#handleException(passable, e);
       }
     };
   }
@@ -115,7 +115,7 @@ class Pipeline {
 
         return pipe[this.method](passable, stack);
       } catch (e) {
-        return this.handleException(passable, e);
+        return this.#handleException(passable, e);
       }
     };
   }
