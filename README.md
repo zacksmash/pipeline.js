@@ -78,7 +78,7 @@ The `pipe()` method is used to define a single step in the pipeline.
 pipeline.send('foo')
   .pipe((value, next) => next(value + 'bar'))
   .pipe((value, next) => next(value + 'baz'))
-  .then((value, next) => {
+  .then((value) => {
     console.log(value) // foobarbaz
   })
 ```
