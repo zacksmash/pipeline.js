@@ -11,7 +11,14 @@
     "Laravel",
     "Pipeline",
     "Middleware",
-    "Funnel"
+    "Funnel",
+    "pipe",
+    "function",
+    "chain",
+    "process",
+    "flow",
+    "sequence",
+    "series"
   ],
   "author": "Zack Warren",
   "license": "MIT",
