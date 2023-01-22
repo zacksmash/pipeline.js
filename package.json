@@ -1,0 +1,22 @@
+{
+  "name": "pipeline.js",
+  "version": "1.0.0",
+  "description": "Laravel's Pipeline in JS form",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zacksmash/pipeline.js.git"
+  },
+  "keywords": [
+    "Laravel",
+    "Pipeline",
+    "Middleware",
+    "Funnel"
+  ],
+  "author": "Zack Warren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zacksmash/pipeline.js/issues"
+  },
+  "homepage": "https://github.com/zacksmash/pipeline.js#readme"
+}
