@@ -13,7 +13,7 @@ npm install pipeline.js
 Import the `Pipeline` class and create a new instance of it.
 
 ```js
-import Pipeline from 'pipeline.js'
+import Pipeline from '@zacksmash/pipeline.js'
 
 const pipeline = new Pipeline()
 
