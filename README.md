@@ -5,7 +5,7 @@ Laravel's Pipeline in JS form
 ## Installation
 
 ```bash
-npm install pipeline.js
+npm install @zacksmash/pipeline.js
 ```
 
 ## Usage

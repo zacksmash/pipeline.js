@@ -1,6 +1,6 @@
 {
   "name": "@zacksmash/pipeline.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Laravel's Pipeline in JS form",
   "main": "index.js",
   "repository": {
