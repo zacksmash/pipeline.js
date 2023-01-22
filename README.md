@@ -19,8 +19,8 @@ const pipeline = new Pipeline()
 
 pipeline.send('foo')
   .through([
-    (value) => value + 'bar',
-    (value) => value + 'baz'
+    (value, next) => next(value + 'bar'),
+    (value, next) => next(value + 'baz')
   ])
   .then((value) => {
     console.log(value) // foobarbaz
@@ -44,27 +44,20 @@ pipeline.send(value)
 The `through()` method is used to define the pipeline's steps. This can be an anonoymous function or lambda. You may also use a JS Class, with a `handle()` method (this can be overridden with the `via()` method). You may choose to use a static method to handle the value, or an instance method.
 
 ```js
-// Anonoymous function
-const pipeOne = (value, stack) => {
-  value = value + 'bar'
-
-  return stack(value)
-}
-
-// Lambda
-const pipeTwo = (value, stack) => stack(value + 'baz')
+// Lambda, Anonoymous function
+const pipeTwo = (value, next) => next(value + 'baz')
 
 // Class
 class PipeThree {
-  handle(value, stack) {
-    return stack(value + 'qux')
+  handle(value, next) {
+    return next(value + 'qux')
   }
 }
 
 // Static method
 class PipeFour {
-  static handle(value, stack) {
-    return stack(value + 'quux')
+  static handle(value, next) {
+    return next(value + 'quux')
   }
 }
 
@@ -83,9 +76,9 @@ The `pipe()` method is used to define a single step in the pipeline.
 
 ```js
 pipeline.send('foo')
-  .pipe((value) => value + 'bar')
-  .pipe((value) => value + 'baz')
-  .then((value) => {
+  .pipe((value, next) => next(value + 'bar'))
+  .pipe((value, next) => next(value + 'baz'))
+  .then((value, next) => {
     console.log(value) // foobarbaz
   })
 ```
@@ -96,8 +89,8 @@ The `via()` method is used to define the method to call on a class. This is usef
 
 ```js
 class PipeFive {
-  process(value, stack) {
-    return stack(value + 'quuz')
+  process(value, next) {
+    return next(value + 'quuz')
   }
 }
 
@@ -115,8 +108,8 @@ The `then()` method is used to define the callback to run after the pipeline has
 ```js
 pipeline.send('foo')
   .through([
-    (value) => value + 'bar',
-    (value) => value + 'baz'
+    (value, next) => next(value + 'bar'),
+    (value, next) => next(value + 'baz')
   ])
   .then((value) => {
     console.log(value) // foobarbaz
@@ -130,8 +123,8 @@ The `thenReturn()` method is used to return the value after the pipeline has fin
 ```js
 const result = pipeline.send('foo')
   .through([
-    (value) => value + 'bar',
-    (value) => value + 'baz'
+    (value, next) => next(value + 'bar'),
+    (value, next) => next(value + 'baz')
   ])
   .thenReturn()
 

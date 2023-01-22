@@ -1,8 +1,12 @@
 class Pipeline {
+  #passable;
+  #pipes;
+  #method;
+
   constructor() {
-    this.passable = null;
-    this.pipes = [];
-    this.method = 'handle';
+    this.#passable = null;
+    this.#pipes = [];
+    this.#method = 'handle';
   }
 
   /**
@@ -12,7 +16,7 @@ class Pipeline {
    * @return  {this}
    */
   send(passable) {
-    this.passable = passable;
+    this.#passable = passable;
 
     return this;
   }
@@ -24,7 +28,7 @@ class Pipeline {
    * @return  {this}
    */
   through(pipes) {
-    this.pipes = Array.isArray(pipes) ? pipes : Array.prototype.slice.call(arguments);
+    this.#pipes = Array.isArray(pipes) ? pipes : Array.prototype.slice.call(arguments);
 
     return this;
   }
@@ -36,7 +40,7 @@ class Pipeline {
    * @return  {this}
    */
   pipe(pipes) {
-    this.pipes = this.pipes.concat(
+    this.#pipes = this.#pipes.concat(
       Array.isArray(pipes) ? pipes : Array.prototype.slice.call(arguments)
     );
 
@@ -50,7 +54,7 @@ class Pipeline {
    * @return  {this}
    */
   via(method) {
-    this.method = method;
+    this.#method = method;
 
     return this;
   }
@@ -62,14 +66,14 @@ class Pipeline {
    * @return  {mixed}
    */
   then(destination) {
-    let pipeline = this.pipes
+    let pipeline = this.#pipes
       .slice()
       .reverse()
       .reduce(
         this.#carry(), this.#prepareDestination(destination)
       );
 
-    return pipeline(this.passable);
+    return pipeline(this.#passable);
   }
 
   /**
@@ -107,13 +111,13 @@ class Pipeline {
       try {
         if (typeof pipe === 'function' && !pipe.prototype) {
           return pipe(passable, stack);
-        } else if (typeof pipe === 'object' && !pipe[this.method]) {
+        } else if (typeof pipe === 'object' && !pipe[this.#method]) {
           throw new Error(`${pipe.constructor.name} was instantiated, but called with static method`)
-        } else if (!pipe[this.method]) {
-          throw new Error(`${pipe.name ?? pipe.constructor.name} does not have a ${this.method} method`);
+        } else if (!pipe[this.#method]) {
+          throw new Error(`${pipe.name ?? pipe.constructor.name} does not have a ${this.#method} method`);
         }
 
-        return pipe[this.method](passable, stack);
+        return pipe[this.#method](passable, stack);
       } catch (e) {
         return this.#handleException(passable, e);
       }
