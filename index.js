@@ -67,7 +67,6 @@ class Pipeline {
    */
   then(destination) {
     let pipeline = this.#pipes
-      .slice()
       .reverse()
       .reduce(
         this.#carry(), this.#prepareDestination(destination)
