@@ -109,11 +109,12 @@ class Pipeline {
     return (stack, pipe) => passable => {
       try {
         if (typeof pipe === 'function' && !pipe.prototype) {
+          // Pipe is a function, execute immediately
           return pipe(passable, stack);
         } else if (typeof pipe === 'object' && !pipe[this.#method]) {
-          throw new Error(`${pipe.constructor.name} was instantiated, but called with static method`)
+          throw new Error(`${pipe.constructor.name} was instantiated, but used a static method`)
         } else if (!pipe[this.#method]) {
-          throw new Error(`${pipe.name ?? pipe.constructor.name} does not have a ${this.#method} method`);
+          throw new Error(`${pipe.name ?? pipe.constructor.name} doesn't have a ${this.#method} method`);
         }
 
         return pipe[this.#method](passable, stack);
