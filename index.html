@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline.js</title>
+</head>
+<body>
+  <h1>Pipeline.js</h1>
+  <p>View the console!</p>
+</body>
+
+<script type="module">
+  import Pipeline from './index.js'
+
+  const pipeline = new Pipeline()
+
+  let result = pipeline.send('foo')
+    .pipe((value, next) => next(value + 'bar'))
+    .pipe((value, next) => next(value + 'baz'))
+    .thenReturn() // foobarbaz
+
+  console.log('result:', result)
+</script>
+</html>

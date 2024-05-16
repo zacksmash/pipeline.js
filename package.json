@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git@github.com:zacksmash/pipeline.js.git"
   },
+  "scripts": {
+    "test": "vitest run /*"
+  },
   "keywords": [
     "Laravel",
     "Pipeline",
@@ -25,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/zacksmash/pipeline.js/issues"
   },
-  "homepage": "https://github.com/zacksmash/pipeline.js#readme"
+  "homepage": "https://github.com/zacksmash/pipeline.js#readme",
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  }
 }
